@@ -5,7 +5,8 @@ Hi humans! haha
 
   okay na evaluation so far. displays positive and negative outputs with decimal. Please test, report and find bugs.
   
- *SOME BUGS*    ->
+ *SOME BUGS*   
+ 
     ()   and  
     (4)
     
