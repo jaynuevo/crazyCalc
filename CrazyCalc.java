@@ -50,8 +50,10 @@ public class CrazyCalc extends JFrame{
 							JOptionPane.showMessageDialog(null, "Input is empty.");
 						
 						else{
-							new PsdArray(input);
-							output.setText(input);
+							PsdArray ps = new PsdArray(input);
+							postfix.setText(ps.getPostfix());
+							output.setText(ps.getAnswer());
+							//output.setText(input);
 						}
 						//send(e.getActionCommand(), link);
 					}					
