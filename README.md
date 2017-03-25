@@ -3,8 +3,17 @@ crazy calculator
 
 Hi humans! haha
 
-  So far, the calculator converts the input expression to its equivalent postfix expression. (Please check for bugs and update)
+  okay na evaluation so far. displays positive and negative outputs with decimal. Please test, report and find bugs.
   
-  Things left to do:
-    -> parse each number and evaluate the postfix expression
-    -> error trap
+  *******SOME BUGS *********
+    ()
+    (4)
+    
+    
+  ******MGA NAERROR TRAP******
+  -if divisor is zero
+    
+  ====THINGS LEFT TO DO====
+    ERROR TRAP
+    if there are letters or other characters in input
+    AND STILL OTHER POSSIBLE ERRORS AND BUGS
