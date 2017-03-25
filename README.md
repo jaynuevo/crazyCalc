@@ -9,14 +9,12 @@ Hi humans! haha
  
    - ()  
    - (4)
-    
-    
+   
  ****MGA NAERROR TRAP****    
  
   -if divisor is zero
     
   ====THINGS LEFT TO DO====
-  
   
     ERROR TRAP 
     -if there are letters or other characters in input-
