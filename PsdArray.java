@@ -5,12 +5,16 @@ import javax.swing.JOptionPane;
 public class PsdArray{
 	Link first = null;
 	Link firstB = null;
+	String buff = "", buffB = "", ansString ="";
+	boolean mathEr=false;
+	
 	
 	public PsdArray(String input) {
 		int[] nums = new int[20];
 		int num, count=0;
-		String in, temp="", buff="";
+		String in, temp="";
 		String comp="";
+		double number, a, b, answer=0;
 		
 		in = input;
 		
@@ -41,6 +45,13 @@ public class PsdArray{
 					}	
 					
 					else if(comp.equals("*") || comp.equals("/")){
+						
+						if (buff != null && buff.length() > 0 && buff.charAt(buff.length()-1)==',') {
+							System.out.println("HOHO");
+						      buff = buff.substring(0, buff.length()-1);
+						    }
+						
+						
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);
@@ -175,14 +186,152 @@ public class PsdArray{
 
 		
 		
+		////////////////////EVALUATION OF POSTFIX EXPRESSION///////////////////////////////
+		for( int i=0; i<buff.length(); i++){
+			temp = Character.toString(buff.charAt(i));
+		
+			if(temp.equals("*") || temp.equals("/") || temp.equals("+") || temp.equals("-")){
+				//push previous
+				System.out.println("PREVIOUS IS" +buffB);
+				if(!buffB.equals("")){
+				pushNumToSecond(buffB);
+				dequeueFirst();
+				first = swap(first, firstB);
+				firstB = null;
+				buffB = "";		
+				}
+				if(temp.equals("+")){
+					//pop
+					a = first.getNum();
+					deleteFirst();
+					b = first.getNum();
+					deleteFirst();
+					
+					System.out.println("DIDI KAY " +a);
+					System.out.println("DIDI KAY " +b);
+					//evaluate
+					answer = a+b;
+					
+					//convert
+					buffB = Double.toString(answer);
+					
+					//push again
+					pushAgain();
+					
+				}
+				else if(temp.equals("-")){
+					b = first.getNum();
+					deleteFirst();
+					a = first.getNum();
+					deleteFirst();
+					
+					answer = a-b;
+					
+					buffB = Double.toString(answer);
+					 
+					pushAgain();
+				}
+				
+				if(temp.equals("*")){
+					//pop
+					a = first.getNum();
+					deleteFirst();
+					b = first.getNum();
+					deleteFirst();
+					
+					//evaluate
+					answer = a*b;
+					
+					//convert
+					buffB = Double.toString(answer);
+					
+					//push again
+					pushAgain();
+					
+				}
+				
+				else if(temp.equals("/")){
+			
+					b = first.getNum();
+					deleteFirst();
+					a = first.getNum();
+					deleteFirst();
+					System.out.println("A is: " +a);
+					System.out.println("B is: " +b);
+					
+					if(b==0){
+						mathEr = true;
+						break;
+					}
+					
+					
+					answer = a/b;
+			
+					buffB = Double.toString(answer);
+					
+					pushAgain();
+					
+				}
+				
+				
+			}
+			
+			else if(temp.equals(",")){
+				pushNumToSecond(buffB);
+				dequeueFirst();
+				first = swap(first, firstB);
+				firstB = null;
+				buffB = "";		
+			}
+			
+			else
+				buffB+= temp;
+		
+			//System.out.println(buffB);
+			
+			
+	
+			
+		
+		
+		}
+		
+		if(mathEr){
+			ansString = "MATH ERROR";
+		}
+		
+		else{
+			answer = first.getNum();
+			System.out.println("ANSWER IS: " +answer);
+				
+			ansString = Double.toString(answer);
+		}
+		
 		
 	}
 	
 	public void pushToSecond (String op){
-		Link newStudent = new Link(op);
-		newStudent.next = firstB;
-		firstB = newStudent;
+		Link l = new Link(op);
+		l.next = firstB;
+		firstB = l;
 	
+	}
+	
+	public void pushNumToSecond (String op){
+		System.out.println("ANSWER IS " +op);
+		Link l = new Link(op);
+		l.setNum();
+		l.next = firstB;
+		firstB = l;
+	
+	}
+	
+	public void pushAgain(){
+		pushNumToSecond(buffB);
+		dequeueFirst();
+		first = swap(first, firstB);
+		firstB = null;
+		buffB = "";	
 	}
 	
 	
@@ -232,6 +381,15 @@ public class PsdArray{
 		}
 		first = null;
 		return buff;
+	
+	}
+	public String getPostfix(){
+		return buff;
+	
+	}
+	
+	public String getAnswer(){
+		return ansString;
 	
 	}
 	
