@@ -1,20 +1,22 @@
 import java.util.Arrays;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 public class PsdArray{
 	Link first = null;
 	Link firstB = null;
 	String buff = "", buffB = "", ansString ="";
 	boolean mathEr=false;
+	JTextArea snap;
 	
-	
-	public PsdArray(String input) {
+	public PsdArray(String input, JTextArea textarea) {
 		int[] nums = new int[20];
 		int num, count=0;
 		String in, temp="";
 		String comp="";
 		double number, a, b, answer=0;
+		snap = textarea;
 		
 		in = input;
 		
@@ -26,17 +28,20 @@ public class PsdArray{
 				if(!Character.toString(in.charAt(i-1)).equals(")"))
 					buff += ",";
 				
-				if(first == null && firstB == null)
+				if(first == null && firstB == null){
+					System.out.println("NULL KAMI");
 					pushToSecond(temp);
-				
+				}
 				else if(temp.equals("+") || temp.equals("-")){
 					
 					////COMPARE FIRST LINK
 					comp = first.getOp();
-					//System.out.println("TEMP " +temp);
-					//System.out.println("AKO" +comp);
-					
+
 					if(comp.equals("+") || comp.equals("-")){
+						snap.append("Current postfix expression: " +buff +"\n");
+						snap.append(" Operator being compared:  " +temp +"\n");
+						snap.append("                   Top of the stack:  " +comp +"\n");
+						snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);
@@ -47,20 +52,17 @@ public class PsdArray{
 					else if(comp.equals("*") || comp.equals("/")){
 						
 						if (buff != null && buff.length() > 0 && buff.charAt(buff.length()-1)==',') {
-							System.out.println("HOHO");
 						      buff = buff.substring(0, buff.length()-1);
 						    }
-						
+						snap.append("Current postfix expression: " +buff +"\n");
+						snap.append(" Operator being compared:  " +temp +"\n");
+						snap.append("                   Top of the stack:  " +comp +"\n");
+						snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
 						
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);
-					///////SHOULD HAVE SOMETHING NGA MACOMPARE PA HIT PREVIOUS LINK
-				//		System.out.println(temp);
 						
-				//		if(first == null)
-				//			push(temp);
-
 						if(first!=null){
 							comp = first.getOp();
 						
@@ -70,27 +72,7 @@ public class PsdArray{
 								dequeueFirst();
 								//pushToSecond(temp);
 							}
-						//	else if(comp.equals("(")){
-								//pushToSecond(temp);	//System.out.println(temp);
-							//	System.out.println("ASYA INI IT LINK ");
-							//	showLink();
-							//	deleteFirst();
-							//	System.out.println(firstB.getOp());
-								
-								/////COMPARE AGAIN
-							//	comp = first.getOp();
-								///if(comp.equals("*") || comp.equals("/")){
-								//	System.out.println("BEFORE");
-								//	showLink();
-								//	buff = buff +comp;
-								//	deleteFirst();
-								///	System.out.println(buff);
-							//		//pushToSecond(temp);
-							//		System.out.println("DIZ IZ LINK");
-							//		showLink();
-							//	}
-							//	dequeueFirst();	
-							//}
+						
 							else {
 								pushToSecond(temp);		
 								dequeueFirst();	
@@ -109,12 +91,20 @@ public class PsdArray{
 					comp = first.getOp();
 					
 					if(comp.equals("*") || comp.equals("/")){
+						snap.append("Current postfix expression: " +buff +"\n");
+						snap.append(" Operator being compared:  " +temp +"\n");
+						snap.append("                   Top of the stack:  " +comp +"\n");
+						snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);	
 					}	
 					
 					else if(comp.equals("+") || comp.equals("-")){
+						snap.append("Current postfix expression: " +buff +"\n");
+						snap.append(" Operator being compared:  " +temp +"\n");
+						snap.append("                   Top of the stack:  " +comp +"\n");
+						snap.append("                                      TASK:  push " +temp +"\n\n");
 						pushToSecond(temp);		
 						dequeueFirst();
 						
@@ -136,14 +126,12 @@ public class PsdArray{
 			}
 			
 			else if(temp.equals(")")){
-				//System.out.println(buff);
 				firstB = null;
 				comp = first.getOp();
-				//System.out.println(comp);
 				showLink();
 				while(true){
 					comp = first.getOp();
-					System.out.println("COMP IS: " +comp);
+		
 					if(comp.equals("(")){
 						deleteFirst();
 						break;
@@ -151,14 +139,12 @@ public class PsdArray{
 					
 					else{
 						buff = buff +comp;
-						System.out.println(buff);
 						deleteFirst();
 					}					
 				}	
 				//pushToSecond(temp);	
 				if(firstB == null){
 					firstB = first;
-					System.out.println("I WAS EMPTY");
 					showLink();
 				}
 				else if(first != null){
@@ -177,14 +163,15 @@ public class PsdArray{
 				first = swap(first, firstB);
 				firstB = null;
 			}
+			snap.append("Current postifx expression is: " +buff +"\n\n");
 		}
+		showLink();
 		buff = popAll(buff);
+		//showLink();
+		snap.append("After popping all elements... \n");
+		snap.append("      FINAL POSTFIX EXPRESSION IS: " +buff +"\n\n");
 		
 		showLink();
-		System.out.println("NUM ARRAY: " +Arrays.toString(nums));
-		System.out.println(buff);
-
-		
 		
 		////////////////////EVALUATION OF POSTFIX EXPRESSION///////////////////////////////
 		for( int i=0; i<buff.length(); i++){
@@ -192,13 +179,12 @@ public class PsdArray{
 		
 			if(temp.equals("*") || temp.equals("/") || temp.equals("+") || temp.equals("-")){
 				//push previous
-				System.out.println("PREVIOUS IS" +buffB);
 				if(!buffB.equals("")){
-				pushNumToSecond(buffB);
-				dequeueFirst();
-				first = swap(first, firstB);
-				firstB = null;
-				buffB = "";		
+					pushNumToSecond(buffB);
+					dequeueFirst();
+					first = swap(first, firstB);
+					firstB = null;
+					buffB = "";		
 				}
 				if(temp.equals("+")){
 					//pop
@@ -207,8 +193,6 @@ public class PsdArray{
 					b = first.getNum();
 					deleteFirst();
 					
-					System.out.println("DIDI KAY " +a);
-					System.out.println("DIDI KAY " +b);
 					//evaluate
 					answer = a+b;
 					
@@ -256,8 +240,6 @@ public class PsdArray{
 					deleteFirst();
 					a = first.getNum();
 					deleteFirst();
-					System.out.println("A is: " +a);
-					System.out.println("B is: " +b);
 					
 					if(b==0){
 						mathEr = true;
@@ -286,14 +268,7 @@ public class PsdArray{
 			
 			else
 				buffB+= temp;
-		
-			//System.out.println(buffB);
-			
-			
-	
-			
-		
-		
+
 		}
 		
 		if(mathEr){
@@ -302,7 +277,6 @@ public class PsdArray{
 		
 		else{
 			answer = first.getNum();
-			System.out.println("ANSWER IS: " +answer);
 				
 			ansString = Double.toString(answer);
 		}
@@ -318,7 +292,6 @@ public class PsdArray{
 	}
 	
 	public void pushNumToSecond (String op){
-		System.out.println("ANSWER IS " +op);
 		Link l = new Link(op);
 		l.setNum();
 		l.next = firstB;
@@ -361,6 +334,7 @@ public class PsdArray{
 			current.show();
 			current = current.next;
 		}
+		System.out.println("END");
 		
 	//	while (currentB!=null){
 	//		currentB.show();
