@@ -3,7 +3,7 @@ crazy calculator
 
 Hi humans! haha
 
-  okay na evaluation so far. displays positive and negative outputs with decimal. Please test, report and find bugs.
+  may bug an evaluation example 1/(3*3)+3. Program has snapshots
   
  ****SOME BUGS****   
  
@@ -19,3 +19,4 @@ Hi humans! haha
     ERROR TRAP 
     -if there are letters or other characters in input-
     AND STILL OTHER POSSIBLE ERRORS AND BUGS
+    FIXED SIZE ARRAY
