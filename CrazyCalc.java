@@ -72,9 +72,7 @@ public class CrazyCalc extends JFrame{
 							PsdArray ps = new PsdArray(input, textArea);
 							postfix.setText(ps.getPostfix());
 							output.setText(ps.getAnswer());
-							//output.setText(input);
 						}
-						//send(e.getActionCommand(), link);
 					}					
 				}				
 		);
