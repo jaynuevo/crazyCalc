@@ -6,12 +6,13 @@ import javax.swing.JTextArea;
 public class PsdArray{
 	Link first = null;
 	Link firstB = null;
-	String buff = "", buffB = "", ansString ="";
+	String buff = "", buffB = "", ansString ="", stack="";
 	boolean mathEr=false;
 	JTextArea snap;
+	final int SIZE = 5;
+	int counter=0;
 	
 	public PsdArray(String input, JTextArea textarea) {
-		int[] nums = new int[20];
 		int num, count=0;
 		String in, temp="";
 		String comp="";
@@ -19,18 +20,21 @@ public class PsdArray{
 		snap = textarea;
 		
 		in = input;
-		
+		System.out.println("EXPRESSION\t\t\tQUEUE\t\t\tSTACK\t\t\tLINKED LIST\t\t\tCOMMITED");
 		for( int i=0; i<in.length(); i++){
+			if(counter<SIZE){
 			temp = Character.toString(in.charAt(i));
-			
+			//showLink();
 			////COMPARES IF OPERATOR
 			if(temp.equals("*") || temp.equals("/") || temp.equals("+") || temp.equals("-")){
+				
 				if(!Character.toString(in.charAt(i-1)).equals(")"))
 					buff += ",";
 				
 				if(first == null && firstB == null){
-					System.out.println("NULL KAMI");
+					//System.out.println("NULL KAMI");
 					pushToSecond(temp);
+					//showLink();
 				}
 				else if(temp.equals("+") || temp.equals("-")){
 					
@@ -45,8 +49,8 @@ public class PsdArray{
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);
-						dequeueFirst();
-						//push(temp);			
+						//showLink();
+						dequeueFirst();		
 					}	
 					
 					else if(comp.equals("*") || comp.equals("/")){
@@ -62,19 +66,23 @@ public class PsdArray{
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);
+						dequeueFirst();
+						//showLink();
 						
 						if(first!=null){
 							comp = first.getOp();
 						
 							if(comp.equals("+") || comp.equals("-")){
 								buff = buff +comp;
+						//		showLink();
 								deleteFirst();
 								dequeueFirst();
 								//pushToSecond(temp);
 							}
 						
 							else {
-								pushToSecond(temp);		
+								pushToSecond(temp);	
+							//	showLink();
 								dequeueFirst();	
 							}
 						}
@@ -98,6 +106,7 @@ public class PsdArray{
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);	
+					//	showLink();
 					}	
 					
 					else if(comp.equals("+") || comp.equals("-")){
@@ -105,7 +114,8 @@ public class PsdArray{
 						snap.append(" Operator being compared:  " +temp +"\n");
 						snap.append("                   Top of the stack:  " +comp +"\n");
 						snap.append("                                      TASK:  push " +temp +"\n\n");
-						pushToSecond(temp);		
+						pushToSecond(temp);
+					//	showLink();
 						dequeueFirst();
 						
 					}	
@@ -128,7 +138,7 @@ public class PsdArray{
 			else if(temp.equals(")")){
 				firstB = null;
 				comp = first.getOp();
-				showLink();
+			
 				while(true){
 					comp = first.getOp();
 		
@@ -145,10 +155,9 @@ public class PsdArray{
 				//pushToSecond(temp);	
 				if(firstB == null){
 					firstB = first;
-					showLink();
+
 				}
 				else if(first != null){
-					showLink();
 					dequeueFirst();
 				}
 			}
@@ -161,17 +170,39 @@ public class PsdArray{
 			
 			if(first == null){
 				first = swap(first, firstB);
+				
 				firstB = null;
 			}
+			System.out.print(in.substring(i,in.length()) +"\t\t\t\t");
+			showLink();
+			
+			System.out.print("\t\t\t" +new StringBuilder(stack).reverse().toString() +"\t\t\t");
+			showLink();
+			System.out.print("\t\t\t\t" +buff);
+			
+			System.out.println("");
+			stack="";
+
 			snap.append("Current postifx expression is: " +buff +"\n\n");
 		}
-		showLink();
+		//	else{
+			//	ansString = "CANNOT PUSH MORE THAN 5 elements";
+				//System.out.println("ARRAY IS FULL");
+				//System.exit(1);
+			//}
+		}
 		buff = popAll(buff);
 		//showLink();
+		
+		
+		System.out.print("\t\t\t" +new StringBuilder(stack).reverse().toString());
+		System.out.print("\t\t\t\t\t\t\t\t\t\t\t" +buff);
+		System.out.println("");
+		
 		snap.append("After popping all elements... \n");
 		snap.append("      FINAL POSTFIX EXPRESSION IS: " +buff +"\n\n");
 		
-		showLink();
+		//showLink();
 		
 		////////////////////EVALUATION OF POSTFIX EXPRESSION///////////////////////////////
 		for( int i=0; i<buff.length(); i++){
@@ -216,7 +247,7 @@ public class PsdArray{
 					pushAgain();
 				}
 				
-				if(temp.equals("*")){
+				else if(temp.equals("*")){
 					//pop
 					a = first.getNum();
 					deleteFirst();
@@ -266,8 +297,15 @@ public class PsdArray{
 				buffB = "";		
 			}
 			
-			else
+			else{
 				buffB+= temp;
+				
+				//if(!buffB.contains("+") && !buffB.contains("-") && !buffB.contains("*") && !buffB.contains("/")){
+				//	pushNumToSecond(buffB);
+				//	first = swap(first, firstB);
+				//	firstB = null;
+				//}
+			}
 
 		}
 		
@@ -276,8 +314,12 @@ public class PsdArray{
 		}
 		
 		else{
+			try{
 			answer = first.getNum();
-				
+			}
+			catch(NullPointerException n){
+				System.out.println("EMPTY");
+			}
 			ansString = Double.toString(answer);
 		}
 		
@@ -285,9 +327,14 @@ public class PsdArray{
 	}
 	
 	public void pushToSecond (String op){
+		counter++;
+		//showLink();
 		Link l = new Link(op);
 		l.next = firstB;
+		//showLink();
+		//System.out.println(op);
 		firstB = l;
+		//showLink();
 	
 	}
 	
@@ -321,20 +368,23 @@ public class PsdArray{
 	
 	
 	public void deleteFirst (){
+		counter--;
 		Link temp = first;
 		first = first.next;
 	}
 	
 	
 	public void showLink(){
-	Link current = first;
-	Link currentB = firstB;
+		Link current = first;
+		Link currentB = firstB;
 	
 		while (current!=null){
+			stack+=current.getOp();
 			current.show();
 			current = current.next;
+			stack+= " ";
 		}
-		System.out.println("END");
+		//System.out.println("END");
 		
 	//	while (currentB!=null){
 	//		currentB.show();
