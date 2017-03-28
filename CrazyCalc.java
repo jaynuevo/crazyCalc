@@ -4,11 +4,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class CrazyCalc extends JFrame{
 	private JTextField output, postfix, inputBox;
-	private JLabel inputL, postL, outL;
+	private JLabel inputL, postL, outL,snapshot;
+	private JTextArea textArea;
+	private JScrollPane scroll;
 	
 	public CrazyCalc(){
 		super("Crazy Calculator");
@@ -41,6 +45,20 @@ public class CrazyCalc extends JFrame{
 		output.setBounds(60,70,300,20);
 		add(output);
 		
+		
+		snapshot = new JLabel("Snapshots:");
+		snapshot.setBounds(10,100,70,20);
+		add(snapshot);
+		
+		
+		textArea = new JTextArea();
+		textArea.setEditable(false);
+				
+		scroll = new JScrollPane(textArea);
+		scroll.setBounds(10,125,355,320);
+		
+		add(scroll);
+		
 		inputBox.addActionListener(
 				new ActionListener(){
 					public void actionPerformed(ActionEvent e){
@@ -50,7 +68,8 @@ public class CrazyCalc extends JFrame{
 							JOptionPane.showMessageDialog(null, "Input is empty.");
 						
 						else{
-							PsdArray ps = new PsdArray(input);
+							textArea.setText(null);
+							PsdArray ps = new PsdArray(input, textArea);
 							postfix.setText(ps.getPostfix());
 							output.setText(ps.getAnswer());
 							//output.setText(input);
