@@ -3,7 +3,7 @@ crazy calculator
 
 Hi humans! haha
 
-  may bug an evaluation example 1/(3*3)+3. Program has snapshots
+  Program has snapshots pero maraksot pa ha gui
   
  ****SOME BUGS****   
  
