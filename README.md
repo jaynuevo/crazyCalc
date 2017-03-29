@@ -5,10 +5,8 @@ Hi humans! haha
 
   Program has snapshots pero maraksot pa ha gui
   
- ****SOME BUGS****   
- 
-   - ()  
-   - (4)
+ ****BUGS****   
+ pamiling pa
    
  ****MGA NAERROR TRAP****    
  
@@ -19,4 +17,4 @@ Hi humans! haha
     ERROR TRAP 
     -if there are letters or other characters in input-
     AND STILL OTHER POSSIBLE ERRORS AND BUGS
-    FIXED SIZE ARRAY
+   
