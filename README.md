@@ -3,8 +3,18 @@ crazy calculator
 
 Hi humans! haha
 
-  So far, the calculator converts the input expression to its equivalent postfix expression. (Please check for bugs and update)
+  Program has snapshots pero maraksot pa ha gui
   
-  Things left to do:
-    -> parse each number and evaluate the postfix expression
-    -> error trap
+ ****BUGS****   
+ pamiling pa
+   
+ ****MGA NAERROR TRAP****    
+ 
+  -if divisor is zero
+    
+  ====THINGS LEFT TO DO====
+  
+    ERROR TRAP 
+    -if there are letters or other characters in input-
+    AND STILL OTHER POSSIBLE ERRORS AND BUGS
+   
