@@ -3,7 +3,12 @@ crazy calculator
 
 Hi humans! haha
 
-  Program has snapshots pero maraksot pa ha gui
+ Gintikangan pala an pag gui as in tikang pala pagcreate mga text fields hahaha
+  
+ 
+ ****UPDATES****
+ fixed a postfix bug (pagdequeue la an kulanghan usa nga part)
+  
   
  ****BUGS****   
  pamiling pa
@@ -18,3 +23,5 @@ Hi humans! haha
     -if there are letters or other characters in input-
     AND STILL OTHER POSSIBLE ERRORS AND BUGS
    
+
+
