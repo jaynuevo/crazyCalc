@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,6 +14,7 @@ public class CrazyCalc extends JFrame{
 	private JLabel inputL, postL, outL,snapshot;
 	private JTextArea textArea;
 	private JScrollPane scroll;
+	private JTextField[] queue;
 	
 	public CrazyCalc(){
 		super("Crazy Calculator");
@@ -45,19 +47,38 @@ public class CrazyCalc extends JFrame{
 		output.setBounds(60,70,300,20);
 		add(output);
 		
+		queue = new JTextField[5];
 		
-		snapshot = new JLabel("Snapshots:");
-		snapshot.setBounds(10,100,70,20);
-		add(snapshot);
+		for(int i=0; i<5; i++){
+			queue[i] = new JTextField("/");
+			queue[i].setEditable(false);
+			queue[i].setBackground(Color.YELLOW);
+			queue[i].setBounds(90+((30*i)),300,30,30);
+			add(queue[i]);
+		}
+		
+		for(int i=0; i<5; i++){
+			queue[i] = new JTextField("+");
+			queue[i].setEditable(false);
+			queue[i].setBackground(Color.CYAN);
+			queue[i].setBounds(60,150+((30*i)),30,30);
+			add(queue[i]);
+		}
 		
 		
-		textArea = new JTextArea();
-		textArea.setEditable(false);
+		
+		//snapshot = new JLabel("Snapshots:");
+		//snapshot.setBounds(10,100,70,20);
+		//add(snapshot);
+		
+		
+		//textArea = new JTextArea();
+		//textArea.setEditable(false);
 				
-		scroll = new JScrollPane(textArea);
-		scroll.setBounds(10,125,355,320);
+		//scroll = new JScrollPane(textArea);
+		//scroll.setBounds(10,125,355,320);
 		
-		add(scroll);
+		//add(scroll);
 		
 		inputBox.addActionListener(
 				new ActionListener(){
@@ -68,7 +89,7 @@ public class CrazyCalc extends JFrame{
 							JOptionPane.showMessageDialog(null, "Input is empty.");
 						
 						else{
-							textArea.setText(null);
+							//textArea.setText(null);
 							PsdArray ps = new PsdArray(input, textArea);
 							postfix.setText(ps.getPostfix());
 							output.setText(ps.getAnswer());
