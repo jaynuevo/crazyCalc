@@ -11,10 +11,10 @@ import javax.swing.JTextField;
 
 public class CrazyCalc extends JFrame{
 	private JTextField output, postfix, inputBox;
-	private JLabel inputL, postL, outL,snapshot;
+	private JLabel inputL, postL, outL,snapshot, stackL, queueL, linkedL, arrayL;
 	private JTextArea textArea;
 	private JScrollPane scroll;
-	private JTextField[] queue;
+	private JTextField[] queue, stack, array, link;
 	
 	public CrazyCalc(){
 		super("Crazy Calculator");
@@ -47,23 +47,55 @@ public class CrazyCalc extends JFrame{
 		output.setBounds(60,70,300,20);
 		add(output);
 		
-		queue = new JTextField[5];
+		queue = new JTextField[8];
+		array = new JTextField[5];
+		stack = new JTextField[8];
+		link = new JTextField[8];
 		
-		for(int i=0; i<5; i++){
-			queue[i] = new JTextField("/");
+		for(int i=0; i<8; i++){
+			queue[i] = new JTextField(null);
 			queue[i].setEditable(false);
-			queue[i].setBackground(Color.YELLOW);
-			queue[i].setBounds(90+((30*i)),300,30,30);
+			queue[i].setBackground(Color.PINK);
+			queue[i].setBounds(90+((30*i)),140,30,30);
 			add(queue[i]);
 		}
+		queueL = new JLabel("Queue");
+		queueL.setBounds(192,172,50,20);
+		add(queueL);
+		
+		for(int i=0; i<8; i++){
+			stack[i] = new JTextField(null);
+			stack[i].setEditable(false);
+			stack[i].setBackground(Color.CYAN);
+			stack[i].setBounds(40,350-((30*i)),30,30);
+			add(stack[i]);
+		}
+		stackL = new JLabel("Stack");
+		stackL.setBounds(37,382,50,20);
+		add(stackL);
+		
 		
 		for(int i=0; i<5; i++){
-			queue[i] = new JTextField("+");
-			queue[i].setEditable(false);
-			queue[i].setBackground(Color.CYAN);
-			queue[i].setBounds(60,150+((30*i)),30,30);
-			add(queue[i]);
+			array[i] = new JTextField(null);
+			array[i].setEditable(false);
+			array[i].setBackground(Color.WHITE);
+			array[i].setBounds(90+((30*i)),245,30,30);
+			add(array[i]);
 		}
+		arrayL = new JLabel("Array");
+		arrayL.setBounds(150,277,50,20);
+		add(arrayL);
+		
+		for(int i=0; i<8; i++){
+			link[i] = new JTextField(null);
+			link[i].setEditable(false);
+			link[i].setBackground(Color.lightGray);
+			link[i].setBounds(90+((30*i)),350,30,30);
+			add(link[i]);
+		}
+		linkedL = new JLabel("Linked List");
+		linkedL.setBounds(178,382,100,20);
+		add(linkedL);
 		
 		
 		
