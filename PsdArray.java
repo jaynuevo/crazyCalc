@@ -8,7 +8,7 @@ public class PsdArray{
 	Link firstB = null;
 	String buff = "", buffB = "", ansString ="", stack="";
 	boolean mathEr=false;
-	JTextArea snap;
+	//JTextArea ////snap;
 	final int SIZE = 5;
 	int counter=0;
 	
@@ -17,7 +17,7 @@ public class PsdArray{
 		String in, temp="";
 		String comp="";
 		double number, a, b, answer=0;
-		snap = textarea;
+		////snap = textarea;
 		
 		in = input;
 		System.out.println("EXPRESSION\t\t\tQUEUE\t\t\tSTACK\t\t\tLINKED LIST\t\t\tCOMMITED");
@@ -41,10 +41,10 @@ public class PsdArray{
 					comp = first.getOp();
 
 					if(comp.equals("+") || comp.equals("-")){
-						snap.append("Current postfix expression: " +buff +"\n");
-						snap.append(" Operator being compared:  " +temp +"\n");
-						snap.append("                   Top of the stack:  " +comp +"\n");
-						snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
+						////snap.append("Current postfix expression: " +buff +"\n");
+						////snap.append(" Operator being compared:  " +temp +"\n");
+						////snap.append("                   Top of the stack:  " +comp +"\n");
+						////snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);
@@ -57,10 +57,10 @@ public class PsdArray{
 						if (buff != null && buff.length() > 0 && buff.charAt(buff.length()-1)==',') {
 						      buff = buff.substring(0, buff.length()-1);
 						    }
-						snap.append("Current postfix expression: " +buff +"\n");
-						snap.append(" Operator being compared:  " +temp +"\n");
-						snap.append("                   Top of the stack:  " +comp +"\n");
-						snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
+						////snap.append("Current postfix expression: " +buff +"\n");
+						////snap.append(" Operator being compared:  " +temp +"\n");
+						////snap.append("                   Top of the stack:  " +comp +"\n");
+						////snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
 						
 						buff = buff +comp;
 						deleteFirst();
@@ -101,21 +101,22 @@ public class PsdArray{
 					comp = first.getOp();
 					
 					if(comp.equals("*") || comp.equals("/")){
-						snap.append("Current postfix expression: " +buff +"\n");
-						snap.append(" Operator being compared:  " +temp +"\n");
-						snap.append("                   Top of the stack:  " +comp +"\n");
-						snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
+						////snap.append("Current postfix expression: " +buff +"\n");
+						////snap.append(" Operator being compared:  " +temp +"\n");
+						////snap.append("                   Top of the stack:  " +comp +"\n");
+						////snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);	
+						dequeueFirst();
 					//	showLink();
 					}	
 					
 					else if(comp.equals("+") || comp.equals("-")){
-						snap.append("Current postfix expression: " +buff +"\n");
-						snap.append(" Operator being compared:  " +temp +"\n");
-						snap.append("                   Top of the stack:  " +comp +"\n");
-						snap.append("                                      TASK:  push " +temp +"\n\n");
+						////snap.append("Current postfix expression: " +buff +"\n");
+						////snap.append(" Operator being compared:  " +temp +"\n");
+						////snap.append("                   Top of the stack:  " +comp +"\n");
+						////snap.append("                                      TASK:  push " +temp +"\n\n");
 						pushToSecond(temp);
 					//	showLink();
 						dequeueFirst();
@@ -185,7 +186,7 @@ public class PsdArray{
 			System.out.println("");
 			stack="";
 
-			snap.append("Current postifx expression is: " +buff +"\n\n");
+			//////snap.append("Current postifx expression is: " +buff +"\n\n");
 		
 		//	else{
 			//	ansString = "CANNOT PUSH MORE THAN 5 elements";
@@ -203,8 +204,8 @@ public class PsdArray{
 		System.out.print("\t\t\t\t\t\t\t\t\t\t\t" +buff);
 		System.out.println("");
 		
-		snap.append("After popping all elements... \n");
-		snap.append("      FINAL POSTFIX EXPRESSION IS: " +buff +"\n\n");
+		//////snap.append("After popping all elements... \n");
+		////snap.append("      FINAL POSTFIX EXPRESSION IS: " +buff +"\n\n");
 		
 		//showLink();
 		
