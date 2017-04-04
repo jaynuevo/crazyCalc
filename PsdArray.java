@@ -1,9 +1,13 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 
-public class PsdArray{
+public class PsdArray extends Thread{
 	Link first = null;
 	Link firstB = null;
 	String buff = "", buffB = "", ansString ="", stack="";
@@ -11,16 +15,27 @@ public class PsdArray{
 	//JTextArea ////snap;
 	final int SIZE = 5;
 	int counter=0;
-	
-	public PsdArray(String input, JTextArea textarea) {
-		int num, count=0;
-		String in, temp="";
-		String comp="";
-		double number, a, b, answer=0;
+	JTextField[] qu,st,ar,li;
+	JTextField post, out;
+	int count=0;
+	String in, temp="";
+	String comp="";
+	double a, b, answer=0;
+	public PsdArray(String input, JTextField[] queue, JTextField[] stack, JTextField[] array, JTextField[] link,  JTextField postfix,  JTextField output) {
+		
+		qu = queue;
+		st = stack;
+		ar = array;
+		li = link;
+		post = postfix;
+		out = output;
 		////snap = textarea;
 		
 		in = input;
 		System.out.println("EXPRESSION\t\t\tQUEUE\t\t\tSTACK\t\t\tLINKED LIST\t\t\tCOMMITED");
+	}	
+		public void run(){
+		
 		for( int i=0; i<in.length(); i++){
 			temp = Character.toString(in.charAt(i));
 			//showLink();
@@ -74,7 +89,7 @@ public class PsdArray{
 							if(comp.equals("+") || comp.equals("-")){
 								buff = buff +comp;
 						//		showLink();
-								deleteFirst();
+								deleteFirstAgain(temp);
 								dequeueFirst();
 								//pushToSecond(temp);
 							}
@@ -179,12 +194,12 @@ public class PsdArray{
 			System.out.print(in.substring(i,in.length()) +"\t\t\t\t");
 			showLink();
 			
-			System.out.print("\t\t\t" +new StringBuilder(stack).reverse().toString() +"\t\t\t");
-			showLink();
-			System.out.print("\t\t\t\t" +buff);
+		//	System.out.print("\t\t\t" +new StringBuilder(stack).reverse().toString() +"\t\t\t");
+		//	showLink();
+		//	System.out.print("\t\t\t\t" +buff);
 			
-			System.out.println("");
-			stack="";
+			//System.out.println("");
+			//stack="";
 
 			//////snap.append("Current postifx expression is: " +buff +"\n\n");
 		
@@ -200,7 +215,7 @@ public class PsdArray{
 		//showLink();
 		
 		
-		System.out.print("\t\t\t" +new StringBuilder(stack).reverse().toString());
+		//System.out.print("\t\t\t" +new StringBuilder(stack).reverse().toString());
 		System.out.print("\t\t\t\t\t\t\t\t\t\t\t" +buff);
 		System.out.println("");
 		
@@ -208,7 +223,9 @@ public class PsdArray{
 		////snap.append("      FINAL POSTFIX EXPRESSION IS: " +buff +"\n\n");
 		
 		//showLink();
-		
+		System.out.println("YOMAN" +buff);
+		System.out.println("COUNTER IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS   " +counter);
+		post.setText(buff);
 		////////////////////EVALUATION OF POSTFIX EXPRESSION///////////////////////////////
 		for( int i=0; i<buff.length(); i++){
 			temp = Character.toString(buff.charAt(i));
@@ -225,9 +242,9 @@ public class PsdArray{
 				if(temp.equals("+")){
 					//pop
 					a = first.getNum();
-					deleteFirst();
+					deleteFirstEval();
 					b = first.getNum();
-					deleteFirst();
+					deleteFirstEval();
 					
 					//evaluate
 					answer = a+b;
@@ -241,9 +258,9 @@ public class PsdArray{
 				}
 				else if(temp.equals("-")){
 					b = first.getNum();
-					deleteFirst();
+					deleteFirstEval();
 					a = first.getNum();
-					deleteFirst();
+					deleteFirstEval();
 					
 					answer = a-b;
 					
@@ -255,9 +272,9 @@ public class PsdArray{
 				else if(temp.equals("*")){
 					//pop
 					a = first.getNum();
-					deleteFirst();
+					deleteFirstEval();
 					b = first.getNum();
-					deleteFirst();
+					deleteFirstEval();
 					
 					//evaluate
 					answer = a*b;
@@ -273,9 +290,9 @@ public class PsdArray{
 				else if(temp.equals("/")){
 			
 					b = first.getNum();
-					deleteFirst();
+					deleteFirstEval();
 					a = first.getNum();
-					deleteFirst();
+					deleteFirstEval();
 					
 					if(b==0){
 						mathEr = true;
@@ -327,9 +344,10 @@ public class PsdArray{
 			}
 			ansString = Double.toString(answer);
 		}
+		out.setText(ansString);
+		}
 		
-		
-	}
+	
 	
 	public void pushToSecond (String op){
 		//counter++;
@@ -340,15 +358,49 @@ public class PsdArray{
 		//System.out.println(op);
 		firstB = l;
 		//showLink();
+		set(op);
+		//qu[counter].setText(op);
+		//qu[counter].setVisible(true);
 	
 	}
+	
+	public void set(String op){
+
+		 try {
+	            Thread.sleep(1000);
+	        }
+	        catch (InterruptedException ie) {
+	            // Handle the exception
+	        }
+		
+		//for(int i=4 ; i<=0; i--){
+			
+		//}
+	//	qu[counter].setText(op);
+	//	qu[counter].setVisible(true);
+				
+		if(counter<5){
+		ar[counter].setText(op);
+		ar[counter].setVisible(true);
+		}		
+		st[counter].setText(op);
+		st[counter].setVisible(true);
+				
+		li[counter].setText(op);
+		li[counter].setVisible(true);
+		counter++;
+			
+	}
+	
+	
+	
 	
 	public void pushNumToSecond (String op){
 		Link l = new Link(op);
 		l.setNum();
 		l.next = firstB;
 		firstB = l;
-	
+		set(op);
 	}
 	
 	public void pushAgain(){
@@ -373,7 +425,104 @@ public class PsdArray{
 	
 	
 	public void deleteFirst (){
+		 try {
+	            Thread.sleep(1000);
+	        }
+	        catch (InterruptedException ie) {
+	            // Handle the exception
+	        }
+		
+		
+		
+		
 		counter--;
+		
+		qu[0].setVisible(false);
+		qu[1].setVisible(false);
+		qu[2].setVisible(false);
+		qu[3].setVisible(false);
+		qu[4].setVisible(false);
+		
+		if(counter<5)
+		ar[counter].setText(null);
+				
+		st[counter].setVisible(false);
+				
+		li[counter].setVisible(false);
+		
+		Link temp = first;
+		first = first.next;
+		showLink();
+	}
+	
+	public void deleteFirstAgain(String op){
+		 try {
+	            Thread.sleep(1000);
+	        }
+	        catch (InterruptedException ie) {
+	            // Handle the exception
+	        }
+		 counter--;
+			//qu[counter].setVisible(false);
+					
+			
+			ar[counter].setText(null);
+		
+			st[counter].setVisible(false);
+					
+			li[counter].setVisible(false);
+		 
+		 counter--;
+		 try {
+	            Thread.sleep(1000);
+	        }
+	        catch (InterruptedException ie) {
+	            // Handle the exception
+	        }
+		 
+		//qu[counter].setText(op);
+		//qu[counter].setVisible(true);
+				
+		ar[counter].setText(op);
+		ar[counter].setVisible(true);
+				
+		st[counter].setText(op);
+		st[counter].setVisible(true);
+				
+		li[counter].setText(op);
+		li[counter].setVisible(true);
+		
+		counter++;
+		Link temp = first;
+		first = first.next;
+		showLink();
+	}
+	
+	public void deleteFirstEval (){
+		
+		 try {
+	            Thread.sleep(1000);
+	        }
+	        catch (InterruptedException ie) {
+	            // Handle the exception
+	        }
+		
+		
+		
+		
+		counter--;
+		
+		//qu[counter].setVisible(false);
+		
+		if(counter<5)
+		ar[counter].setText(null);
+				
+		st[counter].setVisible(false);
+				
+		li[counter].setVisible(false);
+		
+		
+		
 		Link temp = first;
 		first = first.next;
 	}
@@ -382,9 +531,14 @@ public class PsdArray{
 	public void showLink(){
 		Link current = first;
 		Link currentB = firstB;
-	
+		String s;
+		int i=0;
 		while (current!=null){
 			stack+=current.getOp();
+			s = current.getOp();
+			qu[i].setText(s);
+			qu[i].setVisible(true);
+			i++;
 			current.show();
 			current = current.next;
 			stack+= " ";
@@ -403,11 +557,31 @@ public class PsdArray{
 			
 		while (current!=null){
 			//current.show();
+			
+			 try {
+		            Thread.sleep(1000);
+		        }
+		        catch (InterruptedException ie) {
+		            // Handle the exception
+		        }
+			
+			counter--;
+			
+			
+			//qu[counter].setVisible(false);
+			
+			ar[counter].setText(null);
+					
+			st[counter].setVisible(false);
+					
+			li[counter].setVisible(false);
+			
 			comp = current.getOp();
 			buff += comp;
 			
 			current = current.next;
 		}
+		//counter++;
 		first = null;
 		return buff;
 	
