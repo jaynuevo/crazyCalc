@@ -14,7 +14,10 @@ public class CrazyCalc extends JFrame{
 	private JLabel inputL, postL, outL,snapshot, stackL, queueL, linkedL, arrayL;
 	private JTextArea textArea;
 	private JScrollPane scroll;
-	private JTextField[] queue, stack, array, link;
+	JTextField[] queue;
+	private JTextField[] stack;
+	private JTextField[] array;
+	private JTextField[] link;
 	
 	public CrazyCalc(){
 		super("Crazy Calculator");
@@ -55,6 +58,7 @@ public class CrazyCalc extends JFrame{
 		for(int i=0; i<8; i++){
 			queue[i] = new JTextField(null);
 			queue[i].setEditable(false);
+			queue[i].setVisible(false);
 			queue[i].setBackground(Color.PINK);
 			queue[i].setBounds(90+((30*i)),140,30,30);
 			add(queue[i]);
@@ -66,6 +70,7 @@ public class CrazyCalc extends JFrame{
 		for(int i=0; i<8; i++){
 			stack[i] = new JTextField(null);
 			stack[i].setEditable(false);
+			stack[i].setVisible(false);
 			stack[i].setBackground(Color.CYAN);
 			stack[i].setBounds(40,350-((30*i)),30,30);
 			add(stack[i]);
@@ -89,6 +94,7 @@ public class CrazyCalc extends JFrame{
 		for(int i=0; i<8; i++){
 			link[i] = new JTextField(null);
 			link[i].setEditable(false);
+			link[i].setVisible(false);
 			link[i].setBackground(Color.lightGray);
 			link[i].setBounds(90+((30*i)),350,30,30);
 			add(link[i]);
@@ -122,9 +128,10 @@ public class CrazyCalc extends JFrame{
 						
 						else{
 							//textArea.setText(null);
-							PsdArray ps = new PsdArray(input, textArea);
-							postfix.setText(ps.getPostfix());
-							output.setText(ps.getAnswer());
+							PsdArray ps = new PsdArray(input, queue, stack, array, link, postfix, output);
+							ps.start();
+							//postfix.setText(ps.getPostfix());
+							//1+output.setText(ps.getAnswer());
 						}
 					}					
 				}				
