@@ -3,11 +3,11 @@ crazy calculator
 
 Hi humans! haha
 
- Gintikangan pala an pag gui as in tikang pala pagcreate mga text fields hahaha
+queue, array, linked list gui pa it kulang nga gui. ok nat stack
   
  
  ****UPDATES****
- fixed a postfix bug (pagdequeue la an kulanghan usa nga part)
+may stack na
   
   
  ****BUGS****   
