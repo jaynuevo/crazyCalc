@@ -1,12 +1,12 @@
 # crazyCalc
 crazy calculator
 
-Hi humans! haha
+Yo.
 
-  Program has snapshots pero maraksot pa ha gui
+  Program has now gui snapshots. But not yet final. marami pang kailangan ayusin pero keri la anay diz. kulang pan mga testing.
   
  ****BUGS****   
- pamiling pa
+ further debugging pls
    
  ****MGA NAERROR TRAP****    
  
