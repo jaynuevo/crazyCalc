@@ -3,7 +3,7 @@ crazy calculator
 
 Hi humans! haha
 
-  Program has snapshots pero maraksot pa ha gui
+  Pls error trap nlng so far
   
  ****BUGS****   
  pamiling pa
