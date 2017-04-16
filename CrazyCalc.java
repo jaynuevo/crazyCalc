@@ -153,14 +153,82 @@ public class CrazyCalc extends JFrame{
 							int i;
 							for ( i=0; i<input.length();i++)
 							{
-								if (input.charAt(i)=='1' || input.charAt(i)=='0' || input.charAt(i)=='2' || input.charAt(i)=='3' || input.charAt(i)=='4' || input.charAt(i)=='5' || input.charAt(i)=='6' || input.charAt(i)=='7' || input.charAt(i)=='8' || input.charAt(i)=='9' || input.charAt(i)=='+' || input.charAt(i)=='-' || input.charAt(i)=='*' || input.charAt(i)=='/' || input.charAt(i)=='(' || input.charAt(i)==')')
+								if (input.charAt(i)=='1' || input.charAt(i)=='0' || input.charAt(i)=='2' || input.charAt(i)=='3' || input.charAt(i)=='4' || input.charAt(i)=='5' || input.charAt(i)=='6' || input.charAt(i)=='7' || input.charAt(i)=='8' || input.charAt(i)=='9' )
 								{
+									if(i==0 && input.length()>1)
+									{
+										if(input.charAt(i+1)=='(' || input.charAt(i+1)==')')
+											break;
+									}
+									else if(i>0 && i<(input.length()-1))
+									{
+										if(input.charAt(i-1)==')')
+											break;
+										if(input.charAt(i+1)=='(')
+											break;
+									}
+									else if(i==(input.length()-1))
+									{
+										if(input.charAt(i-1)=='(' || input.charAt(i-1)==')')
+											break;
+									}
 									
+								}
+								else if(input.charAt(i)=='+' || input.charAt(i)=='-' || input.charAt(i)=='*' || input.charAt(i)=='/')
+								{
+									if(i==0)
+									{
+										break;
+									}
+									else if(i>0 && i<(input.length()-1))
+									{
+										if(input.charAt(i+1)=='+' || input.charAt(i+1)=='-' || input.charAt(i+1)=='*' || input.charAt(i+1)=='/' || input.charAt(i+1)==')')
+											break;
+										if(input.charAt(i-1)=='+' || input.charAt(i-1)=='-' || input.charAt(i-1)=='*' || input.charAt(i-1)=='/' || input.charAt(i-1)=='(')
+											break;
+									}
+									else if(i==input.length()-1)
+									{
+										break;
+									}
+								}
+								else if(input.charAt(i)=='(')
+								{
+									openCounter++;
+									if(i==0 && input.length()>1)
+									{
+										if(input.charAt(i+1)=='+' || input.charAt(i+1)=='-' || input.charAt(i+1)=='*' || input.charAt(i+1)=='/' || input.charAt(i+1)==')')
+											break;
+									}
+									else if(i>0 && i<(input.length()-1))
+									{
+										if(input.charAt(i+1)=='+' || input.charAt(i+1)=='-' || input.charAt(i+1)=='*' || input.charAt(i+1)=='/' || input.charAt(i+1)==')')
+											break;
+										if(input.charAt(i-1)==')' || input.charAt(i-1)=='1' || input.charAt(i-1)=='0' || input.charAt(i-1)=='2' || input.charAt(i-1)=='3' || input.charAt(i-1)=='4' || input.charAt(i-1)=='5' || input.charAt(i-1)=='6' || input.charAt(i-1)=='7' || input.charAt(i-1)=='8' || input.charAt(i-1)=='9')
+											break;
+									}
+									//else if()
+								}
+								else if(input.charAt(i)==')')
+								{
+									closeCounter++;
+									if(i==0)
+									{
+										break;
+									}
+									else if(i>0 && i<(input.length()-1))
+									{
+										if(input.charAt(i+1)=='(' ||input.charAt(i+1)=='1' || input.charAt(i+1)=='0' || input.charAt(i+1)=='2' || input.charAt(i+1)=='3' || input.charAt(i+1)=='4' || input.charAt(i+1)=='5' || input.charAt(i+1)=='6' || input.charAt(i+1)=='7' || input.charAt(i+1)=='8' || input.charAt(i+1)=='9')
+											break;
+										if(input.charAt(i-1)=='+' || input.charAt(i-1)=='-' || input.charAt(i-1)=='*' || input.charAt(i-1)=='/' || input.charAt(i-1)=='(')
+											break;
+									}
 								}
 								else
 									break;
 							}
-							if (i<input.length())
+							System.out.println("OpenCounter: "+openCounter +" CloseCounter: "+ closeCounter);
+							if (i<input.length() || openCounter!=closeCounter)
 							{
 								JOptionPane.showMessageDialog(null, "Input is invalid.");
 							}
