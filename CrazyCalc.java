@@ -227,7 +227,6 @@ public class CrazyCalc extends JFrame{
 								else
 									break;
 							}
-							System.out.println("OpenCounter: "+openCounter +" CloseCounter: "+ closeCounter);
 							if (i<input.length() || openCounter!=closeCounter)
 							{
 								JOptionPane.showMessageDialog(null, "Input is invalid.");
