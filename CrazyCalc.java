@@ -144,6 +144,7 @@ public class CrazyCalc extends JFrame{
 				new ActionListener(){
 					public void actionPerformed(ActionEvent e){
 						String input = e.getActionCommand();
+						int openCounter=0, closeCounter=0;
 						
 						if(input.length() == 0)
 							JOptionPane.showMessageDialog(null, "Input is empty.");
