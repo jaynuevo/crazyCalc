@@ -150,8 +150,25 @@ public class CrazyCalc extends JFrame{
 						
 						else{
 							//textArea.setText(null);
-							PsdArray ps = new PsdArray(input, queueA, queueB, stack, array, link, postfix, output, c);
-							ps.start();
+							int i;
+							for ( i=0; i<input.length();i++)
+							{
+								if (input.charAt(i)=='1' || input.charAt(i)=='0' || input.charAt(i)=='2' || input.charAt(i)=='3' || input.charAt(i)=='4' || input.charAt(i)=='5' || input.charAt(i)=='6' || input.charAt(i)=='7' || input.charAt(i)=='8' || input.charAt(i)=='9' || input.charAt(i)=='+' || input.charAt(i)=='-' || input.charAt(i)=='*' || input.charAt(i)=='/' || input.charAt(i)=='(' || input.charAt(i)==')')
+								{
+									
+								}
+								else
+									break;
+							}
+							if (i<input.length())
+							{
+								JOptionPane.showMessageDialog(null, "Input is invalid.");
+							}
+							else
+							{
+								PsdArray ps = new PsdArray(input, queueA, queueB, stack, array, link, postfix, output, c);
+								ps.start();
+							}
 							//postfix.setText(ps.getPostfix());
 							//1+output.setText(ps.getAnswer());
 						}
