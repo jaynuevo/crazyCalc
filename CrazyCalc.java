@@ -168,7 +168,7 @@ public class CrazyCalc extends JFrame{
 										if(input.charAt(i+1)=='(')
 											break;
 									}
-									else if(i==(input.length()-1))
+									else if(i==(input.length()-1) && i>0)
 									{
 										if(input.charAt(i-1)=='(' || input.charAt(i-1)==')')
 											break;
