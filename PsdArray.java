@@ -30,7 +30,6 @@ public class PsdArray extends Thread{
 		li = link;
 		post = postfix;
 		out = output;
-		////snap = textarea;
 		
 		in = input;
 		System.out.println("EXPRESSION\t\t\tQUEUE\t\t\tSTACK\t\t\tLINKED LIST\t\t\tCOMMITED");
@@ -49,7 +48,6 @@ public class PsdArray extends Thread{
 		            // Handle the exception
 		        }
 			
-			//showLink();
 			////COMPARES IF OPERATOR
 			if(temp.equals("*") || temp.equals("/") || temp.equals("+") || temp.equals("-")){
 				
@@ -57,9 +55,7 @@ public class PsdArray extends Thread{
 					buff += ",";
 				
 				if(first == null && firstB == null){
-					//System.out.println("NULL KAMI");
 					pushToSecond(temp);
-					//showLink();
 				}
 				else if(temp.equals("+") || temp.equals("-")){
 					
@@ -67,14 +63,9 @@ public class PsdArray extends Thread{
 					comp = first.getOp();
 
 					if(comp.equals("+") || comp.equals("-")){
-						////snap.append("Current postfix expression: " +buff +"\n");
-						////snap.append(" Operator being compared:  " +temp +"\n");
-						////snap.append("                   Top of the stack:  " +comp +"\n");
-						////snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);
-						//showLink();
 						dequeueFirst();		
 					}	
 					
@@ -83,32 +74,22 @@ public class PsdArray extends Thread{
 						if (buff != null && buff.length() > 0 && buff.charAt(buff.length()-1)==',') {
 						      buff = buff.substring(0, buff.length()-1);
 						    }
-						////snap.append("Current postfix expression: " +buff +"\n");
-						////snap.append(" Operator being compared:  " +temp +"\n");
-						////snap.append("                   Top of the stack:  " +comp +"\n");
-						////snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
+					
 						
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);
-						//dequeueFirst();//////////////////////////////////////MADARA AN  5/(5*1)+1
-						//showLink();
-						
+					
 						if(first!=null){
 							comp = first.getOp();
-						//System.out.println("NULL AK TAS COMP KAY: " + comp);
+				
 							if(comp.equals("+") || comp.equals("-")){
 								buff = buff +comp;
-						//		showLink();
 								deleteFirstAgain(temp);
 								dequeueFirst();
-								//pushToSecond(temp);
 							}
 						
 							else {
-								System.out.println("NULL AK TAS COMP KAY: " + comp);
-								//pushToSecond(temp);	
-							//	showLink();
 								dequeueFirst();	
 							}
 						}
@@ -127,24 +108,14 @@ public class PsdArray extends Thread{
 					comp = first.getOp();
 					
 					if(comp.equals("*") || comp.equals("/")){
-						////snap.append("Current postfix expression: " +buff +"\n");
-						////snap.append(" Operator being compared:  " +temp +"\n");
-						////snap.append("                   Top of the stack:  " +comp +"\n");
-						////snap.append("                                      TASK:  commit '" +comp +"' and push '" +temp +"' to stack"+"\n\n");
 						buff = buff +comp;
 						deleteFirst();
 						pushToSecond(temp);	
 						dequeueFirst();
-					//	showLink();
 					}	
 					
 					else if(comp.equals("+") || comp.equals("-")){
-						////snap.append("Current postfix expression: " +buff +"\n");
-						////snap.append(" Operator being compared:  " +temp +"\n");
-						////snap.append("                   Top of the stack:  " +comp +"\n");
-						////snap.append("                                      TASK:  push " +temp +"\n\n");
 						pushToSecond(temp);
-					//	showLink();
 						dequeueFirst();
 						
 					}	
@@ -181,7 +152,6 @@ public class PsdArray extends Thread{
 						deleteFirst();
 					}					
 				}	
-				//pushToSecond(temp);	
 				if(firstB == null){
 					firstB = first;
 
@@ -205,49 +175,23 @@ public class PsdArray extends Thread{
 			System.out.print(in.substring(i,in.length()) +"\t\t\t\t");
 			showLink();
 			for(int j=0; j <8; j++){
-				//quA[i].setVisible(false);
+
 				quB[j].setVisible(false);
 				}
 			
-		//	System.out.print("\t\t\t" +new StringBuilder(stack).reverse().toString() +"\t\t\t");
-		//	showLink();
-		//	System.out.print("\t\t\t\t" +buff);
-			
-			//System.out.println("");
-			//stack="";
-
-			//////snap.append("Current postifx expression is: " +buff +"\n\n");
-		
-		//	else{
-			//	ansString = "CANNOT PUSH MORE THAN 5 elements";
-				//System.out.println("ARRAY IS FULL");
-				//System.exit(1);
-			//}
 		}
 		if(!buff.contains(","))
 			buff += ",";
+		
 		buff = popAll(buff);
-		//showLink();
-		
-		
-		//System.out.print("\t\t\t" +new StringBuilder(stack).reverse().toString());
-		System.out.print("\t\t\t\t\t\t\t\t\t\t\t" +buff);
-		System.out.println("");
-		
-		//////snap.append("After popping all elements... \n");
-		////snap.append("      FINAL POSTFIX EXPRESSION IS: " +buff +"\n\n");
-		
-		//showLink();
-		System.out.println("YOMAN" +buff);
-		System.out.println("COUNTER IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIS   " +counter);
 		post.setText(buff);
+		
 		////////////////////EVALUATION OF POSTFIX EXPRESSION///////////////////////////////
 		for( int i=0; i<buff.length(); i++){
 			temp = Character.toString(buff.charAt(i));
 		
 			ch.setText(temp);
 			
-
 			 try {
 		            Thread.sleep(500);
 		        }
@@ -264,7 +208,6 @@ public class PsdArray extends Thread{
 					firstB = null;
 					showLink();
 					for(int j=0; j <8; j++){
-						//quA[i].setVisible(false);
 						quB[j].setVisible(false);
 						}
 					buffB = "";		
@@ -361,16 +304,9 @@ public class PsdArray extends Thread{
 			
 			else{
 				buffB+= temp;
-				
-				//if(!buffB.contains("+") && !buffB.contains("-") && !buffB.contains("*") && !buffB.contains("/")){
-				//	pushNumToSecond(buffB);
-				//	first = swap(first, firstB);
-				//	firstB = null;
-				//}
 			}
 			showLink();
 			for(int j=0; j <8; j++){
-				//quA[i].setVisible(false);
 				quB[j].setVisible(false);
 				}
 		}
@@ -415,17 +351,10 @@ public class PsdArray extends Thread{
 	
 	
 	public void pushToSecond (String op){
-		//counter++;
-		//showLink();
 		Link l = new Link(op);
 		l.next = firstB;
-		//showLink();
-		//System.out.println(op);
 		firstB = l;
-		//showLink();
 		set(op);
-		//quA[counter].setText(op);
-		//quA[counter].setVisible(true);
 	
 	}
 	
@@ -437,40 +366,17 @@ public class PsdArray extends Thread{
 	        catch (InterruptedException ie) {
 	            // Handle the exception
 	        }
-		
-		//for(int i=4 ; i<=0; i--){
 			
-		//}
-		
-		
-		
-		 
-				
 		if(counter<5){
 		ar[counter].setText(op);
 		ar[counter].setVisible(true);
 		}		
-		///////////////////////////////////////////////////////
+
 		for(int i=0; i <8; i++){
-		//quA[i].setVisible(false);
-		quB[i].setVisible(false);
+			quB[i].setVisible(false);
 		}
-		
 		showLinkB();
-		
-		
-		// try {
-	     //       Thread.sleep(500);
-	     //   }
-	      //  catch (InterruptedException ie) {
-	            // Handle the exception
-	       // }
-		
-		
-	// showLink();
-		//quA[counter].setText(op);
-		//quA[counter].setVisible(true);
-		
+			
 		st[counter].setText(op);
 		st[counter].setVisible(true);
 				
@@ -490,39 +396,19 @@ public class PsdArray extends Thread{
 	            // Handle the exception
 	        }
 		
-		//for(int i=4 ; i<=0; i--){
 			
-		//}
-		
-		
-		
-		 
-				
 		if(counter<5){
 		ar[counter].setText(op);
 		ar[counter].setVisible(true);
 		}		
-		///////////////////////////////////////////////////////
+		
 		for(int i=0; i <8; i++){
-		//quA[i].setVisible(false);
 		quB[i].setVisible(false);
 		}
 		
 		showLinkB();
 		
-		
-		// try {
-	     //       Thread.sleep(500);
-	     //   }
-	      //  catch (InterruptedException ie) {
-	            // Handle the exception
-	       // }
-		
-		
-	// showLink();
-		//quA[counter].setText(op);
-		//quA[counter].setVisible(true);
-		
+	
 		st[counter].setText(op);
 		st[counter].setVisible(true);
 				
@@ -589,10 +475,7 @@ public class PsdArray extends Thread{
 	        catch (InterruptedException ie) {
 	            // Handle the exception
 	        }
-		
-		
-		
-		
+	
 		counter--;
 		
 		quA[0].setVisible(false);
@@ -624,9 +507,7 @@ public class PsdArray extends Thread{
 	            // Handle the exception
 	        }
 		 counter--;
-			//quA[counter].setVisible(false);
-					
-			
+
 			ar[counter].setText(null);
 		
 			st[counter].setVisible(false);
@@ -640,9 +521,7 @@ public class PsdArray extends Thread{
 	        catch (InterruptedException ie) {
 	            // Handle the exception
 	        }
-		 
-		//quA[counter].setText(op);
-		//quA[counter].setVisible(true);
+
 				
 		ar[counter].setText(op);
 		ar[counter].setVisible(true);
@@ -656,7 +535,6 @@ public class PsdArray extends Thread{
 		counter++;
 		Link temp = first;
 		first = first.next;
-		//showLink();
 	}
 	
 	public void deleteFirstEval (){
@@ -707,12 +585,7 @@ public class PsdArray extends Thread{
 			current = current.next;
 			stack+= " ";
 		}
-		//System.out.println("END");
-		
-	//	while (currentB!=null){
-	//		currentB.show();
-	//		currentB = currentB.next;
-	//	}
+
 	}	
 	
 	
@@ -732,12 +605,7 @@ public class PsdArray extends Thread{
 			currentB = currentB.next;
 			stack+= " ";
 		}
-		//System.out.println("END");
-		
-	//	while (currentB!=null){
-	//		currentB.show();
-	//		currentB = currentB.next;
-	//	}
+
 	}	
 	
 	
@@ -746,7 +614,6 @@ public class PsdArray extends Thread{
 		String comp;
 			
 		while (current!=null){
-			//current.show();
 			
 			 try {
 		            Thread.sleep(500);
@@ -756,10 +623,6 @@ public class PsdArray extends Thread{
 		        }
 			
 			counter--;
-			
-			
-			//quA[counter].setVisible(false);
-			
 			
 			ar[counter].setText(null);
 			quA[counter].setVisible(false);
@@ -773,7 +636,6 @@ public class PsdArray extends Thread{
 			
 			current = current.next;
 		}
-		//counter++;
 		first = null;
 		return buff;
 	
