@@ -1,10 +1,7 @@
 # crazyCalc
 crazy calculator
-  
- ****BUGS****   
- pamiling pa if meada pa
-   
-    
-  ====THINGS LEFT TO DO====
+
+latest update:
+paglimpyo han code han mga comments
 
    
