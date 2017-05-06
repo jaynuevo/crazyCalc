@@ -32,7 +32,6 @@ public class PsdArray extends Thread{
 		out = output;
 		
 		in = input;
-		System.out.println("EXPRESSION\t\t\tQUEUE\t\t\tSTACK\t\t\tLINKED LIST\t\t\tCOMMITED");
 	}	
 		public void run(){
 		
@@ -172,7 +171,6 @@ public class PsdArray extends Thread{
 				
 				firstB = null;
 			}
-			System.out.print(in.substring(i,in.length()) +"\t\t\t\t");
 			showLink();
 			for(int j=0; j <8; j++){
 
@@ -320,7 +318,6 @@ public class PsdArray extends Thread{
 			answer = first.getNum();
 			}
 			catch(NullPointerException n){
-				System.out.println("EMPTY");
 			}
 			ansString = Double.toString(answer);
 		}
